@@ -3,12 +3,9 @@ import { useRouter } from 'next/router'
 
 
 const SignIn = ({ providers }) => {
-    const router = useRouter()
-    
     return (
         <>
             {Object.values(providers).map((provider) => {
-                console.log(provider)
                 return (
                     <div key={provider.name}>
                         <button onClick={() => signIn(provider.id)}>

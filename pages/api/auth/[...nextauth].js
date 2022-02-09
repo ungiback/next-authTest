@@ -25,8 +25,7 @@ export default NextAuth({
   secret:process.env.GITHBU_SECRET,
   callbacks: {
     redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) return url
-      // Allows relative callback URLs
+      if (url.startsWith(baseUrl)) return baseUrl //url일 경우 signin페이지로 이동한다. 왜지?
       else if (url.startsWith("/")) return new URL(url, baseUrl).toString()
       return baseUrl
     },
@@ -34,7 +33,6 @@ export default NextAuth({
     async jwt({ token, account }) {
       // Persist the OAuth access_token to the token right after signin
       if (account?.access_token) {
-        console.log("jwt",account)
         token.accessToken = account.access_token
       }
       return token
